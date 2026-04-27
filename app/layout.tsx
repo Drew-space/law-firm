@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Navbar from "@/components/Navbar";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -18,12 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("h-full", "antialiased", inter.variable)}>
       <body className="min-h-full flex flex-col">
-        <main className="flex-1">{children}</main>
-        <footer className="">
-          <div className="container mx-auto px-4 text-center text">
-            <p className="">made with love by Drew</p>
-          </div>
-        </footer>
+        <ClerkProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <footer className="">
+            <div className="container mx-auto px-4 text-center text">
+              <p className="">made with love by Drew</p>
+            </div>
+          </footer>
+        </ClerkProvider>
       </body>
     </html>
   );
