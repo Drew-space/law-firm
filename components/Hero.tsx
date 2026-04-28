@@ -22,7 +22,7 @@ const Hero = () => {
           </p>
         </div>
 
-        <button className="h-12 bg-black text-white rounded-full px-8">
+        <button className="h-12 bg-black text-white rounded-full cursor-pointer px-8">
           Get Started
         </button>
       </div>
