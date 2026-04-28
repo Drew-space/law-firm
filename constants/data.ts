@@ -9,7 +9,7 @@ export type Feature = {
 
 export const navLinks = [
   { name: "About", href: "#about" },
-  { name: "Plans", href: "#plan" },
+  { name: "Plans", href: "#plans" },
   { name: "Testimonial", href: "#testimonials" },
 ];
 export const features: Feature[] = [

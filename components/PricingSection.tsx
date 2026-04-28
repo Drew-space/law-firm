@@ -2,12 +2,11 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Check, Scale } from "lucide-react";
 import { creditBenefits } from "@/constants/data";
-import Pricing from "./Pricing";
 import { PricingTable } from "@clerk/nextjs";
 
 const PricingSection = () => {
   return (
-    <section className="py-20 font-inter ">
+    <section id="plans" className="py-20 font-inter ">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
