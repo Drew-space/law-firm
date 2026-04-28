@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
+import { navLinks } from "@/constants/data";
 
 const Navbar = () => {
   return (
@@ -17,6 +18,17 @@ const Navbar = () => {
             width={200}
           />
         </Link>
+        <div className="hidden md:flex   items-center gap-12">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="text-md   hover:text-foreground transition"
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
 
         <Show when="signed-out">
           <SignUpButton>

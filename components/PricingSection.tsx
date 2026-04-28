@@ -2,6 +2,8 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Check, Scale } from "lucide-react";
 import { creditBenefits } from "@/constants/data";
+import Pricing from "./Pricing";
+import { PricingTable } from "@clerk/nextjs";
 
 const PricingSection = () => {
   return (
@@ -16,6 +18,7 @@ const PricingSection = () => {
             Choose the legal service plan that fits your needs.
           </p>
         </div>
+        <PricingTable />
         <Card className="mt-12 bg-muted/20 ">
           <CardHeader>
             <CardTitle>

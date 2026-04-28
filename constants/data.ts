@@ -7,6 +7,11 @@ export type Feature = {
   description: string;
 };
 
+export const navLinks = [
+  { name: "About", href: "#about" },
+  { name: "Plans", href: "#plan" },
+  { name: "Testimonial", href: "#testimonials" },
+];
 export const features: Feature[] = [
   {
     icon: User,
