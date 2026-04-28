@@ -1,3 +1,4 @@
+import CTA from "@/components/CTA";
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/How-It-Works";
 import PricingSection from "@/components/PricingSection";
@@ -11,6 +12,7 @@ export default function Home() {
       <HowItWorks />
       <PricingSection />
       <Testimonial />
+      <CTA />
     </main>
   );
 }
