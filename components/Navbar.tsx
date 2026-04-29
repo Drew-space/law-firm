@@ -36,7 +36,11 @@ const Navbar = () => {
           </SignUpButton>
         </Show>
         <Show when="signed-in">
-          <UserButton />
+          <Link href={"/dashboard"}>
+            <Button variant={"outline"}>Dashboard</Button>
+          </Link>
+
+          {/* <UserButton /> */}
         </Show>
       </nav>
     </header>
