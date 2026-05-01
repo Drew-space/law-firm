@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 
 import { SearchForm } from "@/components/search-form";
@@ -16,6 +18,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { FilePenLine, FolderOpen, LayoutDashboard } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 // This is sample data.
 const data = {
@@ -28,7 +31,7 @@ const data = {
         {
           title: "Dashoard",
           url: "#",
-          isActive: true,
+
           icon: LayoutDashboard,
         },
         {
@@ -47,6 +50,8 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -59,12 +64,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
           <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
+                    <SidebarMenuButton asChild isActive={pathname === item.url}>
                       <Link href={item.url}>
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
