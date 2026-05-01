@@ -1,12 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
@@ -33,9 +26,24 @@ export default function Page() {
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
+            <div className="aspect-video text-yellow-500 ring ring-yellow-500 rounded-xl bg-[#fef9c3] flex flex-col p-4">
+              <h1 className="text-sm font-medium">Total Case</h1>
+              <div className="flex flex-1 items-center justify-center">
+                <p className="text-4xl font-semibold">12</p>
+              </div>
+            </div>
+            <div className="aspect-video text-blue-500 ring ring-blue-500 rounded-xl bg-[#dbeafe] flex flex-col p-4">
+              <h1 className="text-sm font-medium ">Pending</h1>
+              <div className="flex flex-1 items-center justify-center">
+                <p className="text-4xl font-semibold">4</p>
+              </div>
+            </div>
+            <div className="aspect-video rounded-xl bg-[#dcfce7] flex flex-col ring ring-green-500 p-4">
+              <h1 className="text-sm font-medium text-[#66a98d] ">Approved</h1>
+              <div className="flex flex-1 items-center justify-center">
+                <p className="text-4xl  text-[#66a98d] font-semibold">6</p>
+              </div>
+            </div>
           </div>
           <div className="min-h-screen flex-1 rounded-xl bg-muted/50 md:min-h-min" />
         </div>

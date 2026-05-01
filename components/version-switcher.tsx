@@ -42,7 +42,7 @@ export function VersionSwitcher({
                 <Scale className="size-4" />
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
-                <span className="font-medium">Acme Inc</span>
+                <span className="text-base font-semibold">Acme Chambers</span>
               </div>
             </SidebarMenuButton>
           </DropdownMenuTrigger>
