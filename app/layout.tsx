@@ -21,7 +21,9 @@ export default function RootLayout({
         lang="en"
         className={cn("h-full antialiased", inter.variable, bebas.variable)}
       >
-        <body className="min-h-full flex flex-col">{children}</body>
+        <body suppressHydrationWarning className="min-h-full flex flex-col">
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );

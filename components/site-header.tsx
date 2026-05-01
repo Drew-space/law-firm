@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { SidebarTrigger } from "@/components/ui/sidebar"
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { UserButton } from "@clerk/nextjs";
 
 export function SiteHeader() {
   return (
@@ -9,10 +10,14 @@ export function SiteHeader() {
         <SidebarTrigger className="-ml-1" />
         <Separator
           orientation="vertical"
-          className="mx-2 data-[orientation=vertical]:h-4"
+          className="mx-2 data-[orientation=vertical]:h-full"
         />
-        <h1 className="text-base font-medium">Documents</h1>
+
+        <div className="flex justify-between items-center w-full">
+          <h1 className="text-base font-medium">Dashboard</h1>
+        </div>
+        <UserButton />
       </div>
     </header>
-  )
+  );
 }

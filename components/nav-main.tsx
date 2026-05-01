@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { CirclePlusIcon, MailIcon } from "lucide-react";
+import {} from "lucide-react";
 
 export function NavMain({
   items,

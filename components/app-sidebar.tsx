@@ -1,179 +1,83 @@
-"use client";
-
 import * as React from "react";
 
-import { NavDocuments } from "@/components/nav-documents";
-import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
-import { NavUser } from "@/components/nav-user";
+import { SearchForm } from "@/components/search-form";
+import { VersionSwitcher } from "@/components/version-switcher";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarRail,
 } from "@/components/ui/sidebar";
-import {
-  LayoutDashboardIcon,
-  ListIcon,
-  ChartBarIcon,
-  FolderIcon,
-  UsersIcon,
-  CameraIcon,
-  FileTextIcon,
-  Settings2Icon,
-  CircleHelpIcon,
-  SearchIcon,
-  DatabaseIcon,
-  FileChartColumnIcon,
-  FileIcon,
-  CommandIcon,
-  Scale,
-  UserRound,
-  FolderOpen,
-  FilePenLine,
-} from "lucide-react";
+import Link from "next/link";
+import { FilePenLine, FolderOpen, LayoutDashboard } from "lucide-react";
 
+// This is sample data.
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
+  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
-      title: "Dashboard",
+      title: "Build Your Application",
       url: "#",
-      icon: <LayoutDashboardIcon />,
-    },
-    {
-      title: "File a Case",
-      url: "#",
-      icon: <FilePenLine />,
-    },
-    {
-      title: "My Case",
-      url: "#",
-      icon: <FolderOpen />,
-    },
-    {
-      title: "Profile",
-      url: "#",
-      icon: <UserRound />,
+      items: [
+        {
+          title: "Dashoard",
+          url: "#",
+          isActive: true,
+          icon: LayoutDashboard,
+        },
+        {
+          title: "File case",
+          url: "#",
+          icon: FilePenLine,
+        },
+        {
+          title: "My case",
+          url: "#",
+          icon: FolderOpen,
+        },
+      ],
     },
   ],
-  // navClouds: [
-  //   {
-  //     title: "Capture",
-  //     icon: <CameraIcon />,
-  //     isActive: true,
-  //     url: "#",
-  //     items: [
-  //       {
-  //         title: "Active Proposals",
-  //         url: "#",
-  //       },
-  //       {
-  //         title: "Archived",
-  //         url: "#",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     title: "Proposal",
-  //     icon: <FileTextIcon />,
-  //     url: "#",
-  //     items: [
-  //       {
-  //         title: "Active Proposals",
-  //         url: "#",
-  //       },
-  //       {
-  //         title: "Archived",
-  //         url: "#",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     title: "Prompts",
-  //     icon: <FileTextIcon />,
-  //     url: "#",
-  //     items: [
-  //       {
-  //         title: "Active Proposals",
-  //         url: "#",
-  //       },
-  //       {
-  //         title: "Archived",
-  //         url: "#",
-  //       },
-  //     ],
-  //   },
-  // ],
-  // navSecondary: [
-  //   {
-  //     title: "Settings",
-  //     url: "#",
-  //     icon: <Settings2Icon />,
-  //   },
-  //   {
-  //     title: "Get Help",
-  //     url: "#",
-  //     icon: <CircleHelpIcon />,
-  //   },
-  //   {
-  //     title: "Search",
-  //     url: "#",
-  //     icon: <SearchIcon />,
-  //   },
-  // ],
-  // documents: [
-  //   {
-  //     name: "Data Library",
-  //     url: "#",
-  //     icon: <DatabaseIcon />,
-  //   },
-  //   {
-  //     name: "Reports",
-  //     url: "#",
-  //     icon: <FileChartColumnIcon />,
-  //   },
-  //   {
-  //     name: "Word Assistant",
-  //     url: "#",
-  //     icon: <FileIcon />,
-  //   },
-  // ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar {...props}>
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
-            >
-              <a href="#">
-                <Scale className="size-5!" />
-                <span className="text-base font-semibold">Acme Inc.</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <VersionSwitcher
+          versions={data.versions}
+          defaultVersion={data.versions[0]}
+        />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        {/* <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
+        {/* We create a SidebarGroup for each parent. */}
+        {data.navMain.map((item) => (
+          <SidebarGroup key={item.title}>
+            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {item.items.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild isActive={item.isActive}>
+                      <Link href={item.url}>
+                        {item.icon && <item.icon />}
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
+      <SidebarRail />
     </Sidebar>
   );
 }
