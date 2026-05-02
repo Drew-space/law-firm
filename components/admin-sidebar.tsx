@@ -24,7 +24,7 @@ import {
 
 const navItems = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
-  { title: "All cases", url: "/admin/cases", icon: FolderOpen },
+
   { title: "Users", url: "/admin/users", icon: Users },
   { title: "Scheduled", url: "/admin/scheduled", icon: CalendarCheck },
 ];
