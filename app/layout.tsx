@@ -1,4 +1,4 @@
-import { Bebas_Neue, Inter } from "next/font/google";
+import { Bebas_Neue, Inter, Montserrat } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "@/app/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -10,6 +10,12 @@ const bebas = Bebas_Neue({
   variable: "--font-heading",
 });
 
+const montserrat = Montserrat({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -19,7 +25,12 @@ export default function RootLayout({
     <ClerkProvider>
       <html
         lang="en"
-        className={cn("h-full antialiased", inter.variable, bebas.variable)}
+        className={cn(
+          "h-full antialiased",
+          inter.variable,
+          bebas.variable,
+          montserrat.variable,
+        )}
       >
         <body suppressHydrationWarning className="min-h-full flex flex-col">
           {children}

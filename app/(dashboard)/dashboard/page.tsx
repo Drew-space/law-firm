@@ -1,4 +1,9 @@
+"use client";
+
+// replace <AppSidebar /> with <AdminSidebar />
 import { AppSidebar } from "@/components/app-sidebar";
+import { RecentCases } from "@/components/RecentCases";
+import { Card, CardContent } from "@/components/ui/card";
 
 import { Separator } from "@/components/ui/separator";
 import {
@@ -6,9 +11,10 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 export default function Page() {
+  const { user } = useUser();
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -25,6 +31,14 @@ export default function Page() {
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
+          <div className=" flex flex-col">
+            <h1 className="text-4xl text-black tracking-tighter font-inter  font-bold ">
+              Hello, <span>Drew </span>{" "}
+            </h1>
+            <p className="text-muted-foreground">
+              File your case and get it resolve online
+            </p>
+          </div>
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
             <div className="aspect-video text-yellow-500 ring ring-yellow-500 rounded-xl bg-[#fef9c3] flex flex-col p-4">
               <h1 className="text-sm font-medium">Total Case</h1>
@@ -45,7 +59,9 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <div className="min-h-screen flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+          <div className="min-h-screen flex-1 rounded-xl bg-muted/50 md:min-h-min">
+            <RecentCases />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
