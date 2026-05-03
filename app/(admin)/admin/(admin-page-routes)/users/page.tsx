@@ -193,7 +193,7 @@ export default function UsersPage() {
 
       <Card>
         <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <CardTitle className="text-sm font-medium">
+          <CardTitle className="text-sm font-inter font-medium">
             All users ({filtered.length})
           </CardTitle>
           <Input

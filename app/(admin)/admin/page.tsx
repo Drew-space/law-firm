@@ -232,7 +232,9 @@ export default function AdminPage() {
       {/* cases — scrollable, view only */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-sm font-medium">All Cases</CardTitle>
+          <CardTitle className="text-sm font-inter font-medium">
+            All Cases
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-2 max-h-[420px] overflow-y-auto pr-1">

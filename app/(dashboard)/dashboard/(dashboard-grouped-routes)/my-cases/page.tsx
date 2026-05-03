@@ -192,7 +192,7 @@ export default function MyCasesPage() {
 
       <Card>
         <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <CardTitle className="text-sm font-medium">
+          <CardTitle className="text-sm font-inter font-medium">
             All cases ({filtered.length})
           </CardTitle>
           {/* filters scroll horizontally on mobile */}

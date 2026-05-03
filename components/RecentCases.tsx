@@ -121,7 +121,9 @@ export function RecentCases() {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-sm font-medium">Recent Cases</CardTitle>
+        <CardTitle className="text-sm font-inter font-medium">
+          Recent Cases
+        </CardTitle>
         <span className="text-xs text-blue-600 cursor-pointer">View all</span>
       </CardHeader>
       <CardContent>
