@@ -203,25 +203,25 @@ export default function AdminPage() {
     <div className="flex flex-1 flex-col gap-4 p-4">
       {/* stat cards — horizontal scroll on mobile */}
       <div className="flex px-2 py-2 gap-3 overflow-x-auto pb-1 md:grid md:grid-cols-4 md:overflow-visible">
-        <div className="min-w-[130px] ring ring-blue-500 rounded-xl bg-[#bfdbfe] text-blue-600 flex flex-col p-4 md:aspect-video shrink-0 md:shrink md:min-w-0">
+        <div className="min-w-32.5 ring ring-blue-500 rounded-xl bg-[#bfdbfe] text-blue-600 flex flex-col p-4 md:aspect-video shrink-0 md:shrink md:min-w-0">
           <h1 className="text-sm font-medium">Total</h1>
           <div className="flex flex-1 items-center justify-center py-4 md:py-0">
             <p className="text-4xl font-semibold">58</p>
           </div>
         </div>
-        <div className="min-w-[130px] rounded-xl bg-[#fef9c3] ring ring-yellow-400 text-yellow-600 flex flex-col p-4 md:aspect-video shrink-0 md:shrink md:min-w-0">
+        <div className="min-w-32.5 rounded-xl bg-[#fef9c3] ring ring-yellow-400 text-yellow-600 flex flex-col p-4 md:aspect-video shrink-0 md:shrink md:min-w-0">
           <h1 className="text-sm font-medium">Pending</h1>
           <div className="flex flex-1 items-center justify-center py-4 md:py-0">
             <p className="text-4xl font-semibold">14</p>
           </div>
         </div>
-        <div className="min-w-[130px] rounded-xl bg-[#dcfce7] ring ring-green-400 text-green-600 flex flex-col p-4 md:aspect-video shrink-0 md:shrink md:min-w-0">
+        <div className="min-w-32.5 rounded-xl bg-[#dcfce7] ring ring-green-400 text-green-600 flex flex-col p-4 md:aspect-video shrink-0 md:shrink md:min-w-0">
           <h1 className="text-sm font-medium">Approved</h1>
           <div className="flex flex-1 items-center justify-center py-4 md:py-0">
             <p className="text-4xl font-semibold">31</p>
           </div>
         </div>
-        <div className="min-w-[130px] rounded-xl bg-[#fee2e2] ring ring-red-400 text-red-600 flex flex-col p-4 md:aspect-video shrink-0 md:shrink md:min-w-0">
+        <div className="min-w-32.5 rounded-xl bg-[#fee2e2] ring ring-red-400 text-red-600 flex flex-col p-4 md:aspect-video shrink-0 md:shrink md:min-w-0">
           <h1 className="text-sm font-medium">Canceled</h1>
           <div className="flex flex-1 items-center justify-center py-4 md:py-0">
             <p className="text-4xl font-semibold">13</p>
