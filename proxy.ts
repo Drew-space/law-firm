@@ -24,6 +24,10 @@ export default clerkMiddleware(async (auth, req) => {
   if (isDashboardRoute(req) && !userId) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
+
+  if (isDashboardRoute(req) && role === "admin") {
+    return NextResponse.redirect(new URL("/admin", req.url));
+  }
 });
 
 export const config = {

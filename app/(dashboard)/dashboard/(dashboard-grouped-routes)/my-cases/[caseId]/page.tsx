@@ -85,7 +85,9 @@ export default function UserCasePage() {
       {/* case details */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-sm font-medium">Case details</CardTitle>
+          <CardTitle className="text-sm font-inter font-medium">
+            Case details
+          </CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-2 gap-4">
           <div className="flex flex-col gap-1">
@@ -106,7 +108,7 @@ export default function UserCasePage() {
       {/* description */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-sm font-medium">
+          <CardTitle className="text-sm font-inter font-medium">
             Case description
           </CardTitle>
         </CardHeader>
@@ -128,7 +130,9 @@ export default function UserCasePage() {
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
             {caseData.fileUrls.map((url, i) => {
-            const isImage = url.match(/\.(jpg|jpeg|png|webp)$/i) || url.includes("unsplash");
+              const isImage =
+                url.match(/\.(jpg|jpeg|png|webp)$/i) ||
+                url.includes("unsplash");
               return (
                 <div
                   key={i}
