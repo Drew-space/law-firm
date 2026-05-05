@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as cases from "../cases.js";
 import type * as http from "../http.js";
 import type * as users from "../users.js";
 
@@ -18,6 +19,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  cases: typeof cases;
   http: typeof http;
   users: typeof users;
 }>;

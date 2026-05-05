@@ -1,151 +1,73 @@
-// import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// import { Badge } from "@/components/ui/badge";
+"use client";
 
-// const cases = [
-//   {
-//     id: "#00421",
-//     title: "Property dispute — Lekki estate",
-//     type: "Civil",
-//     status: "Pending",
-//     date: "Apr 28, 2026",
-//   },
-//   {
-//     id: "#00418",
-//     title: "Contract breach — vendor agreement",
-//     type: "Commercial",
-//     status: "Approved",
-//     date: "Apr 20, 2026",
-//   },
-//   {
-//     id: "#00410",
-//     title: "Employment termination appeal",
-//     type: "Labour",
-//     status: "In review",
-//     date: "Apr 12, 2026",
-//   },
-//   {
-//     id: "#00404",
-//     title: "Debt recovery — personal loan",
-//     type: "Civil",
-//     status: "Canceled",
-//     date: "Mar 30, 2026",
-//   },
-// ];
-
-// const badgeStyles: Record<string, string> = {
-//   Pending: "bg-yellow-100 text-yellow-800",
-//   Approved: "bg-green-100 text-green-800",
-//   "In review": "bg-purple-100 text-purple-800",
-//   Canceled: "bg-red-100 text-red-800",
-// };
-
-// export function RecentCases() {
-//   return (
-//     <Card>
-//       <CardHeader className="flex flex-row items-center justify-between">
-//         <CardTitle className="text-sm font-inter font-medium">
-//           Recent Cases
-//         </CardTitle>
-//         <span className="text-xs text-blue-600 cursor-pointer">View all</span>
-//       </CardHeader>
-//       <CardContent className="flex   flex-col gap-3">
-//         {cases.map((c) => (
-//           <div
-//             key={c.id}
-//             className="flex cursor-pointer items-center justify-between rounded-lg border p-3"
-//           >
-//             <div className="flex flex-col gap-0.5">
-//               <p className="text-sm font-medium">{c.title}</p>
-//               <p className="text-xs text-muted-foreground">
-//                 {c.id} · {c.type}
-//               </p>
-//             </div>
-//             <div className="flex items-center gap-3">
-//               <Badge
-//                 className={`${badgeStyles[c.status]} rounded-full text-xs`}
-//               >
-//                 {c.status}
-//               </Badge>
-//               <span className="text-xs text-muted-foreground">{c.date}</span>
-//             </div>
-//           </div>
-//         ))}
-//       </CardContent>
-//     </Card>
-//   );
-// }
-
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-
-const cases = [
-  {
-    id: "#00421",
-    title: "Property dispute — Lekki estate",
-    type: "Civil",
-    status: "Pending",
-    date: "Apr 28, 2026",
-  },
-  {
-    id: "#00418",
-    title: "Contract breach — vendor agreement",
-    type: "Commercial",
-    status: "Approved",
-    date: "Apr 20, 2026",
-  },
-  {
-    id: "#00410",
-    title: "Employment termination appeal",
-    type: "Labour",
-    status: "In review",
-    date: "Apr 12, 2026",
-  },
-  {
-    id: "#00404",
-    title: "Debt recovery — personal loan",
-    type: "Civil",
-    status: "Canceled",
-    date: "Mar 30, 2026",
-  },
-];
 
 const badgeStyles: Record<string, string> = {
-  Pending: "bg-yellow-100 text-yellow-800",
-  Approved: "bg-green-100 text-green-800",
-  "In review": "bg-purple-100 text-purple-800",
-  Canceled: "bg-red-100 text-red-800",
+  pending: "bg-yellow-100 text-yellow-800",
+  approved: "bg-green-100 text-green-800",
+  in_review: "bg-purple-100 text-purple-800",
+  canceled: "bg-red-100 text-red-800",
+};
+
+const statusLabel: Record<string, string> = {
+  pending: "Pending",
+  approved: "Approved",
+  in_review: "In Review",
+  canceled: "Canceled",
 };
 
 export function RecentCases() {
+  const { user } = useUser();
+  const router = useRouter();
+
+  const cases =
+    useQuery(
+      api.cases.getUserCases,
+      user?.id ? { clerkId: user.id } : "skip",
+    ) ?? [];
+
+  const recent = cases.slice(0, 5);
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-sm font-inter font-medium">
-          Recent Cases
-        </CardTitle>
-        <span className="text-xs text-blue-600 cursor-pointer">View all</span>
+        <CardTitle className="text-sm font-medium">Recent Cases</CardTitle>
+        <span
+          className="text-xs text-blue-600 cursor-pointer"
+          onClick={() => router.push("/dashboard/my-cases")}
+        >
+          View all
+        </span>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col gap-2 max-h-[340px] overflow-y-auto pr-1">
-          {cases.map((c) => (
+          {recent.length === 0 && (
+            <p className="text-sm text-muted-foreground text-center py-8">
+              No cases yet. File your first case.
+            </p>
+          )}
+          {recent.map((c) => (
             <div
-              key={c.id}
-              className="flex items-center gap-3 border rounded-md p-3"
+              key={c._id}
+              className="flex items-center gap-3 border rounded-md p-3 cursor-pointer hover:bg-muted/30 transition-colors"
+              onClick={() => router.push(`/dashboard/my-cases/${c._id}`)}
             >
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium truncate">{c.title}</p>
-                <p className="text-xs text-muted-foreground">
-                  {c.id} · {c.type}
-                </p>
+                <p className="text-xs text-muted-foreground">{c.caseType}</p>
               </div>
               <Badge
                 className={`${badgeStyles[c.status]} rounded-full text-xs shrink-0`}
               >
-                {c.status}
+                {statusLabel[c.status]}
               </Badge>
               <span className="text-xs text-muted-foreground hidden md:block shrink-0">
-                {c.date}
+                {new Date(c._creationTime).toLocaleDateString()}
               </span>
             </div>
           ))}
