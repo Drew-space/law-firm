@@ -30,7 +30,7 @@ const Hero = () => {
       {/* images */}
       <div className="w-full max-w-5xl">
         <div className="flex gap-4 w-full">
-          <div className="relative w-[60%] h-80 rounded-md overflow-hidden">
+          <div className="relative w-[60%] h-45 md:h-80 rounded-md overflow-hidden">
             <Image
               src="/law-image.jpg"
               alt="Law"
@@ -39,7 +39,7 @@ const Hero = () => {
             />
           </div>
 
-          <div className="relative w-[40%] h-80 rounded-md overflow-hidden">
+          <div className="relative w-[40%] h-45 md:h-80 rounded-md overflow-hidden">
             <Image
               src="/image.png"
               alt="Platform"

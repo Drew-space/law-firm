@@ -2,6 +2,7 @@ import { Bebas_Neue, Inter, Montserrat } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "@/app/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import ConvexClientProvider from "@/components/provider/ConvexClientProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const bebas = Bebas_Neue({
@@ -33,7 +34,12 @@ export default function RootLayout({
         )}
       >
         <body suppressHydrationWarning className="min-h-full flex flex-col">
-          {children}
+          <ConvexClientProvider>
+              {children}
+
+          </ConvexClientProvider>
+         
+
         </body>
       </html>
     </ClerkProvider>
