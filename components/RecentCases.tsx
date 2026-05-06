@@ -25,10 +25,7 @@ export function RecentCases() {
   const { user } = useUser();
   const router = useRouter();
 
-  const cases =
-    useQuery(
-      api.cases.getUserCases,
-      user?.id ? { clerkId: user.id } : "skip",
+  const cases = useQuery(api.cases.getUserCases,user?.id ? { clerkId: user.id } : "skip",
     ) ?? [];
 
   const recent = cases.slice(0, 5);
