@@ -121,7 +121,7 @@ export default function FileCasePage() {
         opposingParty: data.opposingParty || undefined,
         description,
         clerkId: user.id,
-        storageIds,
+        fileUrls: storageIds,
       });
 
       toast.success("Case submitted successfully");

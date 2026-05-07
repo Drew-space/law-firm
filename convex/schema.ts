@@ -12,6 +12,7 @@ export default defineSchema({
   }).index("by_clerkId", ["clerkId"]),
 
   cases: defineTable({
+    caseNumber: v.string(),
     title: v.string(),
     caseType: v.string(),
     opposingParty: v.optional(v.string()),
@@ -24,7 +25,18 @@ export default defineSchema({
     ),
     clerkId: v.string(),
     fileUrls: v.optional(v.array(v.string())),
+    assignedLawyer: v.optional(v.string()),
+    hearingDate: v.optional(v.string()),
+    venue: v.optional(v.string()),
   })
     .index("by_clerkId", ["clerkId"])
-    .index("by_status", ["status"]),
+    .index("by_status", ["status"])
+    .index("by_caseNumber", ["caseNumber"]),
+
+  lawyers: defineTable({
+    name: v.string(),
+    email: v.string(),
+    phone: v.optional(v.string()),
+    specialization: v.optional(v.string()),
+  }),
 });

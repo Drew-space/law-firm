@@ -1,21 +1,22 @@
 [
   {
+    "caseNumber": "CASE-2026-00001",
     "title": "Property dispute — Lekki estate",
     "caseType": "Property & land",
     "opposingParty": "Lagos State Government",
-    "description": "<p>The applicant acquired a parcel of land at Lekki Phase 1 in 2019 via a registered deed of assignment. Despite valid documentation, the opposing party has continued to encroach on the property.</p>",
+    "description": "<p>The applicant acquired a parcel of land at Lekki Phase 1 in 2019.</p>",
     "status": "pending",
     "clerkId": "user_abc123",
     "fileUrls": [
-      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800",
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800"
+      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800"
     ]
   },
   {
+    "caseNumber": "CASE-2026-00002",
     "title": "Contract breach — vendor agreement",
     "caseType": "Commercial / business",
     "opposingParty": "XYZ Supplies Ltd",
-    "description": "<p>The vendor failed to deliver goods as agreed in the signed contract dated January 2026, causing significant financial loss to the applicant.</p>",
+    "description": "<p>The vendor failed to deliver goods as agreed in the signed contract.</p>",
     "status": "in_review",
     "clerkId": "user_def456",
     "fileUrls": [
@@ -23,28 +24,31 @@
     ]
   },
   {
+    "caseNumber": "CASE-2026-00003",
     "title": "Employment termination appeal",
     "caseType": "Employment & labour",
     "opposingParty": "Acme Corporation",
-    "description": "<p>The applicant was unlawfully dismissed without due process after 5 years of service. No notice period was given and severance was withheld.</p>",
+    "description": "<p>The applicant was unlawfully dismissed without due process after 5 years of service.</p>",
     "status": "approved",
     "clerkId": "user_ghi789",
     "fileUrls": []
   },
   {
+    "caseNumber": "CASE-2026-00004",
     "title": "Debt recovery — personal loan",
     "caseType": "Debt recovery",
     "opposingParty": "James Okafor",
-    "description": "<p>A personal loan of ₦500,000 was given to the respondent in March 2025. The respondent has refused to repay despite multiple demands.</p>",
+    "description": "<p>A personal loan of ₦500,000 was given to the respondent in March 2025.</p>",
     "status": "canceled",
     "clerkId": "user_abc123",
     "fileUrls": []
   },
   {
+    "caseNumber": "CASE-2026-00005",
     "title": "Land acquisition — Abuja FCT",
     "caseType": "Property & land",
     "opposingParty": "Federal Capital Territory Authority",
-    "description": "<p>The applicant's land was acquired without compensation by the FCTA for road construction. The applicant seeks fair compensation as guaranteed by law.</p>",
+    "description": "<p>The applicant's land was acquired without compensation by the FCTA.</p>",
     "status": "pending",
     "clerkId": "user_def456",
     "fileUrls": [

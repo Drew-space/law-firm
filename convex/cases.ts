@@ -1,7 +1,7 @@
+import { internal } from "./_generated/api";
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
-// user submits a case
 export const createCase = mutation({
   args: {
     title: v.string(),
@@ -9,22 +9,47 @@ export const createCase = mutation({
     opposingParty: v.optional(v.string()),
     description: v.string(),
     clerkId: v.string(),
-    storageIds: v.optional(v.array(v.string())),
+    fileUrls: v.optional(v.array(v.string())),
   },
   handler: async (ctx, args) => {
-    return await ctx.db.insert("cases", {
+    const count = await ctx.db.query("cases").collect();
+    const number = String(count.length + 1).padStart(5, "0");
+    const year = new Date().getFullYear();
+    const caseNumber = `CASE-${year}-${number}`;
+
+    const caseId = await ctx.db.insert("cases", {
+      caseNumber,
       title: args.title,
       caseType: args.caseType,
       opposingParty: args.opposingParty,
       description: args.description,
       clerkId: args.clerkId,
-      fileUrls: args.storageIds ?? [],
       status: "pending",
+      fileUrls: args.fileUrls ?? [],
     });
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", args.clerkId))
+      .unique();
+
+    if (user?.email) {
+      await ctx.scheduler.runAfter(0, internal.email.sendStatusEmail, {
+        email: user.email,
+        userName: user.name,
+        caseTitle: args.title,
+        caseNumber,
+        status: "pending",
+        assignedLawyer: undefined,
+        hearingDate: undefined,
+        venue: undefined,
+      });
+    }
+
+    return caseId;
   },
 });
 
-// get all cases for a specific user
 export const getUserCases = query({
   args: { clerkId: v.string() },
   handler: async (ctx, args) => {
@@ -36,7 +61,6 @@ export const getUserCases = query({
   },
 });
 
-// get a single case by its id — for the view case page
 export const getCaseById = query({
   args: { caseId: v.id("cases") },
   handler: async (ctx, args) => {
@@ -44,7 +68,6 @@ export const getCaseById = query({
   },
 });
 
-// get case stats for a user — for their dashboard
 export const getUserCaseStats = query({
   args: { clerkId: v.string() },
   handler: async (ctx, args) => {
@@ -63,14 +86,12 @@ export const getUserCaseStats = query({
   },
 });
 
-// get all cases — for admin
 export const getAllCases = query({
   handler: async (ctx) => {
     return await ctx.db.query("cases").order("desc").collect();
   },
 });
 
-// get case stats — for admin dashboard
 export const getAdminCaseStats = query({
   handler: async (ctx) => {
     const cases = await ctx.db.query("cases").collect();
@@ -84,7 +105,6 @@ export const getAdminCaseStats = query({
   },
 });
 
-// admin updates a case status — approve, cancel, set in_review
 export const updateCaseStatus = mutation({
   args: {
     caseId: v.id("cases"),
@@ -94,9 +114,38 @@ export const updateCaseStatus = mutation({
       v.literal("approved"),
       v.literal("canceled"),
     ),
+    assignedLawyer: v.optional(v.string()),
+    hearingDate: v.optional(v.string()),
+    venue: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    await ctx.db.patch(args.caseId, { status: args.status });
+    const caseData = await ctx.db.get(args.caseId);
+    if (!caseData) throw new Error("Case not found");
+
+    await ctx.db.patch(args.caseId, {
+      status: args.status,
+      assignedLawyer: args.assignedLawyer,
+      hearingDate: args.hearingDate,
+      venue: args.venue,
+    });
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", caseData.clerkId))
+      .unique();
+
+    if (user?.email) {
+      await ctx.scheduler.runAfter(0, internal.email.sendStatusEmail, {
+        email: user.email,
+        userName: user.name,
+        caseTitle: caseData.title,
+        caseNumber: caseData.caseNumber ?? "N/A",
+        status: args.status,
+        assignedLawyer: args.assignedLawyer,
+        hearingDate: args.hearingDate,
+        venue: args.venue,
+      });
+    }
   },
 });
 
@@ -106,7 +155,6 @@ export const generateUploadUrl = mutation({
   },
 });
 
-// step 2 — get the file url from storageId (for displaying)
 export const getFileUrl = query({
   args: { storageId: v.string() },
   handler: async (ctx, args) => {

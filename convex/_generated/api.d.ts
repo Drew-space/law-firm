@@ -9,7 +9,9 @@
  */
 
 import type * as cases from "../cases.js";
+import type * as email from "../email.js";
 import type * as http from "../http.js";
+import type * as lawyers from "../lawyers.js";
 import type * as users from "../users.js";
 
 import type {
@@ -20,7 +22,9 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   cases: typeof cases;
+  email: typeof email;
   http: typeof http;
+  lawyers: typeof lawyers;
   users: typeof users;
 }>;
 
