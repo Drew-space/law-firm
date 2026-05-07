@@ -7,12 +7,12 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="pt-25">
+    <>
       <Hero />
       <HowItWorks />
       <PricingSection />
       <Testimonial />
       <CTA />
-    </main>
+    </>
   );
 }
