@@ -62,7 +62,7 @@ export default function AdminPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col gap-2 max-h-[420px] overflow-y-auto pr-1">
+          <div className="flex flex-col gap-2 max-h-150 overflow-y-auto pr-1">
             {cases.length === 0 && (
               <p className="text-sm text-muted-foreground text-center py-10">
                 No cases yet.
