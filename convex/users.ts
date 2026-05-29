@@ -17,16 +17,6 @@ export const createUser = mutation({
 
     if (existingUser) return existingUser._id;
 
-    // const userId = await ctx.db.insert("users", {
-    //   email: args.email,
-    //   name: args.name,
-    //   clerkId: args.clerkId,
-    //   imageUrl: args.imageUrl,
-    //   username: args.username,
-    //   updatedAt: Date.now(),
-    // });
-
-    // return userId;
     return await ctx.db.insert("users", {
       ...args,
       updatedAt: Date.now(),
@@ -43,7 +33,6 @@ export const getUserByClerkId = query({
       .unique();
   },
 });
-
 
 export const getAllUsers = query({
   handler: async (ctx) => {
